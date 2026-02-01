@@ -122,8 +122,13 @@ sprite_frames = SubResource("SpriteFrames_gal2x")
 animation = &"up"
 autoplay = "idle"
 
+<<<<<<< HEAD
 [node name="Camera2D" type="Camera2D" parent="." unique_id=688124522]
 ignore_rotation = false
 enabled = false
 limit_enabled = false
 limit_left = 0
+=======
+[node name="Camera2D" type="Camera2D" parent="."]
+position_smoothing_enabled = true
+>>>>>>> 33cab91715793df2c8f7218e6ad217a1e7b44692
