@@ -1,6 +1,5 @@
 [gd_scene format=4 uid="uid://6s1akt13gp88"]
 
-[ext_resource type="PackedScene" uid="uid://dtchjsfop6e0g" path="res://player/p1.tscn" id="1_fwqmw"]
 [ext_resource type="Texture2D" uid="uid://m54ifcaprtav" path="res://Scene/Seasonal Tilesets/2 - Autumn Forest/Autumn_entities (16 x 16).png" id="2_efvm1"]
 [ext_resource type="Texture2D" uid="uid://u5ucf35dpttw" path="res://Scene/Seasonal Tilesets/2 - Autumn Forest/Terrain (16 x 16).png" id="3_g5ndb"]
 [ext_resource type="Texture2D" uid="uid://dofuv3078optg" path="res://Scene/Seasonal Tilesets/2 - Autumn Forest/Background parts/6 - Distant_trees.png" id="4_g5ndb"]
@@ -8,7 +7,12 @@
 [ext_resource type="Texture2D" uid="uid://6np46ky4c1m0" path="res://Scene/Seasonal Tilesets/2 - Autumn Forest/Background parts/4 - Tree_row_BG_1.png" id="6_q34lh"]
 [ext_resource type="Texture2D" uid="uid://crbw78tr6wfrb" path="res://Scene/Seasonal Tilesets/2 - Autumn Forest/Background parts/3 - Bottom_leaf_piles.png" id="7_4y8et"]
 [ext_resource type="Texture2D" uid="uid://dufft52yhvgxy" path="res://Scene/Seasonal Tilesets/2 - Autumn Forest/Background parts/2 - Trees.png" id="8_2ss0f"]
+[ext_resource type="PackedScene" uid="uid://bnxvv5y2322yq" path="res://player/camera.tscn" id="9_4y8et"]
 [ext_resource type="Texture2D" uid="uid://cicdxje731n5c" path="res://Scene/Seasonal Tilesets/2 - Autumn Forest/Background parts/1 - Leaf_top.png" id="9_iasnv"]
+[ext_resource type="PackedScene" uid="uid://dtchjsfop6e0g" path="res://player/Player.tscn" id="10_4y8et"]
+
+[sub_resource type="TileMapPattern" id="TileMapPattern_q34lh"]
+tile_data = PackedInt32Array(0, 65537, 3, 1, 131073, 3, 2, 393217, 3, 3, 458753, 3)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mgs6g"]
 texture = ExtResource("2_efvm1")
@@ -54,21 +58,33 @@ texture = ExtResource("2_efvm1")
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_r1kk3"]
 texture = ExtResource("3_g5ndb")
 3:1/0 = 0
+3:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 4:1/0 = 0
+4:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 5:1/0 = 0
+5:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 11:1/0 = 0
 3:2/0 = 0
+3:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 4:2/0 = 0
+4:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 5:2/0 = 0
+5:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 11:2/0 = 0
 1:3/0 = 0
+1:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 2:3/0 = 0
 2:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 3:3/0 = 0
+3:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 4:3/0 = 0
+4:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 5:3/0 = 0
+5:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 6:3/0 = 0
+6:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 7:3/0 = 0
+7:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 9:3/0 = 0
 10:3/0 = 0
 11:3/0 = 0
@@ -76,34 +92,48 @@ texture = ExtResource("3_g5ndb")
 13:3/0 = 0
 15:3/0 = 0
 1:4/0 = 0
+1:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 2:4/0 = 0
+2:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 3:4/0 = 0
+3:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 4:4/0 = 0
+4:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 5:4/0 = 0
+5:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 6:4/0 = 0
+6:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 7:4/0 = 0
+7:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 11:4/0 = 0
 3:5/0 = 0
+3:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 4:5/0 = 0
+4:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 5:5/0 = 0
+5:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 11:5/0 = 0
 3:6/0 = 0
+3:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 4:6/0 = 0
+4:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 5:6/0 = 0
+5:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 4:8/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_dwmuu"]
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_mgs6g")
 sources/1 = SubResource("TileSetAtlasSource_r1kk3")
+pattern_0 = SubResource("TileMapPattern_q34lh")
 
 [node name="floresta" type="Node2D" unique_id=621271799]
 
-[node name="CharacterBody2D" parent="." unique_id=887340483 instance=ExtResource("1_fwqmw")]
-position = Vector2(14, 39)
+[node name="Player" parent="." unique_id=887340483 groups=["Player"] instance=ExtResource("10_4y8et")]
+position = Vector2(27, 128)
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1292963013]
-tile_map_data = PackedByteArray("AAAAAAwAAQACAAMAAAABAAwAAQACAAMAAAACAAwAAQACAAMAAAADAAwAAQACAAMAAAAEAAwAAQACAAMAAAAFAAwAAQACAAMAAAAGAAwAAQACAAMAAAAHAAwAAQACAAMAAAAIAAwAAQACAAMAAAAJAAwAAQACAAMAAAAKAAwAAQACAAMAAAALAAwAAQACAAMAAAAMAAwAAQACAAMAAAANAAwAAQACAAMAAAAOAAwAAQACAAMAAAAPAAwAAQACAAMAAAAQAAwAAQACAAMAAAARAAwAAQACAAMAAAASAAwAAQACAAMAAAATAAwAAQACAAMAAAAUAAwAAQACAAMAAAAVAAwAAQACAAMAAAAWAAwAAQACAAMAAAAXAAwAAQACAAMAAAAYAAwAAQACAAMAAAAZAAwAAQACAAMAAAAaAAwAAQACAAMAAAAbAAwAAQACAAMAAAAcAAwAAQACAAMAAAAdAAwAAQACAAMAAAAeAAwAAQACAAMAAAAfAAwAAQACAAMAAAAgAAwAAQACAAMAAAAhAAwAAQACAAMAAAAiAAwAAQACAAMAAAAjAAwAAQACAAMAAAAkAAwAAQACAAMAAAAlAAwAAQACAAMAAAAmAAwAAQACAAMAAAA=")
+tile_map_data = PackedByteArray("AAAAAAwAAQACAAMAAAABAAwAAQACAAMAAAACAAwAAQACAAMAAAADAAwAAQACAAMAAAAEAAwAAQACAAMAAAAFAAwAAQACAAMAAAAGAAwAAQACAAMAAAAHAAwAAQACAAMAAAAIAAwAAQACAAMAAAAJAAwAAQACAAMAAAAKAAwAAQACAAMAAAALAAwAAQACAAMAAAAMAAwAAQACAAMAAAANAAwAAQACAAMAAAAOAAwAAQACAAMAAAAPAAwAAQACAAMAAAAQAAwAAQACAAMAAAARAAwAAQACAAMAAAASAAwAAQACAAMAAAATAAwAAQACAAMAAAAUAAwAAQACAAMAAAAVAAwAAQACAAMAAAAWAAwAAQACAAMAAAAXAAwAAQACAAMAAAAYAAwAAQACAAMAAAAZAAwAAQACAAMAAAAaAAwAAQACAAMAAAAbAAwAAQACAAMAAAAcAAwAAQACAAMAAAAdAAwAAQACAAMAAAAeAAwAAQACAAMAAAAfAAwAAQACAAMAAAAgAAwAAQACAAMAAAAhAAwAAQACAAMAAAAiAAwAAQACAAMAAAAjAAwAAQACAAMAAAAkAAwAAQACAAMAAAAlAAwAAQACAAMAAAAmAAwAAQACAAMAAAAKAAoAAQABAAMAAAALAAoAAQACAAMAAAAMAAoAAQAGAAMAAAANAAoAAQAHAAMAAAAOAAgAAQABAAMAAAAPAAgAAQACAAMAAAAQAAgAAQAGAAMAAAARAAgAAQAHAAMAAAASAAcAAQABAAMAAAATAAcAAQACAAMAAAAUAAcAAQAGAAMAAAAVAAcAAQAHAAMAAAAWAAUAAQABAAMAAAAXAAUAAQACAAMAAAAYAAUAAQAGAAMAAAAZAAUAAQAHAAMAAAAbAAQAAQABAAMAAAAcAAQAAQACAAMAAAAdAAQAAQAGAAMAAAAeAAQAAQAHAAMAAAAfAAMAAQABAAMAAAAgAAMAAQACAAMAAAAhAAMAAQAGAAMAAAAiAAMAAQAHAAMAAAAkAAIAAQABAAMAAAAlAAIAAQACAAMAAAAmAAIAAQAGAAMAAAAnAAIAAQAHAAMAAAApAAEAAQABAAMAAAAqAAEAAQACAAMAAAArAAEAAQAGAAMAAAAsAAEAAQAHAAMAAAAtAAAAAQABAAMAAAAuAAAAAQACAAMAAAAvAAAAAQAGAAMAAAAwAAAAAQAHAAMAAAAxAP//AQABAAMAAAAyAP//AQACAAMAAAAzAP//AQAGAAMAAAA0AP//AQAHAAMAAAA1AP3/AQABAAMAAAA2AP3/AQACAAMAAAA3AP3/AQAGAAMAAAA4AP3/AQAHAAMAAAAwAPv/AQABAAMAAAAxAPv/AQACAAMAAAAyAPv/AQAGAAMAAAAzAPv/AQAHAAMAAAAsAPn/AQABAAMAAAAtAPn/AQACAAMAAAAuAPn/AQAGAAMAAAAvAPn/AQAHAAMAAAAnAPf/AQABAAMAAAAoAPf/AQACAAMAAAApAPf/AQAGAAMAAAAqAPf/AQAHAAMAAAAjAPX/AQABAAMAAAAkAPX/AQACAAMAAAAlAPX/AQAGAAMAAAAmAPX/AQAHAAMAAAAeAPP/AQABAAMAAAAfAPP/AQACAAMAAAAgAPP/AQAGAAMAAAAhAPP/AQAHAAMAAAAZAPH/AQABAAMAAAAaAPH/AQACAAMAAAAbAPH/AQAGAAMAAAAcAPH/AQAHAAMAAAAUAO//AQABAAMAAAAVAO//AQACAAMAAAAWAO//AQAGAAMAAAAXAO//AQAHAAMAAAAPAO3/AQABAAMAAAAQAO3/AQACAAMAAAARAO3/AQAGAAMAAAASAO3/AQAHAAMAAAAKAOv/AQABAAMAAAALAOv/AQACAAMAAAAMAOv/AQAGAAMAAAANAOv/AQAHAAMAAAA=")
 tile_set = SubResource("TileSet_dwmuu")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="." unique_id=1899706654]
@@ -179,3 +209,7 @@ texture = ExtResource("9_iasnv")
 centered = false
 region_enabled = true
 region_rect = Rect2(0, 0, 576, 208)
+
+[node name="Camera" parent="." unique_id=1844342126 groups=["player"] instance=ExtResource("9_4y8et")]
+position = Vector2(78, 119)
+limit_top = 0

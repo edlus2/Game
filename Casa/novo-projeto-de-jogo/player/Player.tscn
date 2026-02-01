@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dtchjsfop6e0g"]
 
-[ext_resource type="Script" uid="uid://r7k1ilwgfr7d" path="res://player/p_1.gd" id="1_e30r6"]
+[ext_resource type="Script" uid="uid://gnbsdw15bb6c" path="res://player/player.gd" id="1_3c3w1"]
 [ext_resource type="Texture2D" uid="uid://iu6w5cqcj8ay" path="res://Scene/Sprite Pack 6/1 - Penguin/Idle (16 x 16).png" id="2_ns7sx"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cst5t"]
@@ -50,9 +50,10 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="CharacterBody2D" type="CharacterBody2D" unique_id=887340483]
-position = Vector2(29, 59)
-script = ExtResource("1_e30r6")
+[node name="Player" type="CharacterBody2D" unique_id=887340483 groups=["player"]]
+position = Vector2(54, 21)
+slide_on_ceiling = false
+script = ExtResource("1_3c3w1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=142586497]
 shape = SubResource("CapsuleShape2D_cst5t")
@@ -65,10 +66,3 @@ sprite_frames = SubResource("SpriteFrames_cfd83")
 animation = &"idle"
 autoplay = "idle"
 frame_progress = 0.27158445
-
-[node name="Camera2D" type="Camera2D" parent="." unique_id=1877766555]
-limit_left = 0
-limit_top = 0
-limit_right = 2500
-limit_bottom = 208
-position_smoothing_enabled = true

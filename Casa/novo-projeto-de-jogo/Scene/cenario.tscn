@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://bfn0jasf6iwcg"]
 
-[ext_resource type="PackedScene" uid="uid://dtchjsfop6e0g" path="res://player/p1.tscn" id="1_tiwb7"]
+[ext_resource type="PackedScene" uid="uid://dtchjsfop6e0g" path="res://player/Player.tscn" id="1_tiwb7"]
 [ext_resource type="TileSet" uid="uid://c4dv8r0sw8axe" path="res://Scene/new_tile_set.tres" id="2_858cl"]
 
 [node name="Cenario" type="Node2D" unique_id=638249151]
