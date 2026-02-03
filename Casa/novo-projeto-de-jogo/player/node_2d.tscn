@@ -1,0 +1,13 @@
+[gd_scene format=4 uid="uid://cf0yxby17ntru"]
+
+[ext_resource type="PackedScene" uid="uid://bffsp4enkm4xp" path="res://p1.tscn" id="1_lf62g"]
+[ext_resource type="TileSet" uid="uid://c4dv8r0sw8axe" path="res://Scene/new_tile_set.tres" id="2_7mixf"]
+
+[node name="Node2D" type="Node2D" unique_id=1497141018]
+
+[node name="CharacterBody2D" parent="." unique_id=2015772030 instance=ExtResource("1_lf62g")]
+position = Vector2(111, 35)
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=2111859689]
+tile_map_data = PackedByteArray("AAAAAAwAAAABAAMAAAABAAwAAAACAAMAAAACAAwAAAAGAAMAAAADAAwAAAAHAAMAAAAEAAwAAAABAAMAAAAFAAwAAAACAAMAAAAGAAwAAAAGAAMAAAAHAAwAAAAHAAMAAAAIAAwAAAABAAMAAAAJAAwAAAACAAMAAAAKAAwAAAAGAAMAAAALAAwAAAAHAAMAAAAMAAwAAAABAAMAAAANAAwAAAACAAMAAAAOAAwAAAAGAAMAAAAPAAwAAAAHAAMAAAAQAAwAAAABAAMAAAARAAwAAAACAAMAAAASAAwAAAAGAAMAAAATAAwAAAAHAAMAAAAUAAwAAAABAAMAAAAVAAwAAAACAAMAAAAWAAwAAAAGAAMAAAAXAAwAAAAHAAMAAAAUAAsAAAABAAMAAAAVAAsAAAACAAMAAAAWAAsAAAAGAAMAAAAXAAsAAAAHAAMAAAA=")
+tile_set = ExtResource("2_7mixf")

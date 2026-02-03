@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bub7p7igqs0mk"]
+[gd_scene format=3 uid="uid://bub7p7igqs0mk"]
 
 [ext_resource type="Script" uid="uid://4mwkxklq23h0" path="res://p1.gd" id="1_yr2f7"]
 [ext_resource type="Texture2D" uid="uid://dpoaonkurisl0" path="res://img/1 - Penguin/Idle (16 x 16).png" id="2_l6t7d"]
@@ -111,16 +111,24 @@ animations = [{
 "speed": 10.0
 }]
 
-[node name="P1" type="CharacterBody2D"]
+[node name="P1" type="CharacterBody2D" unique_id=1457849307]
 script = ExtResource("1_yr2f7")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=827307395]
 shape = SubResource("CapsuleShape2D_l6t7d")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1571860039]
 sprite_frames = SubResource("SpriteFrames_gal2x")
 animation = &"up"
 autoplay = "idle"
 
+<<<<<<< HEAD
+[node name="Camera2D" type="Camera2D" parent="." unique_id=688124522]
+ignore_rotation = false
+enabled = false
+limit_enabled = false
+limit_left = 0
+=======
 [node name="Camera2D" type="Camera2D" parent="."]
 position_smoothing_enabled = true
+>>>>>>> 33cab91715793df2c8f7218e6ad217a1e7b44692
