@@ -4,6 +4,7 @@
 
 [node name="Camera" type="Camera2D" unique_id=1844342126 groups=["Player"]]
 limit_left = 0
-limit_bottom = 208
+limit_top = -9999994
+limit_bottom = 214
 position_smoothing_enabled = true
 script = ExtResource("1_8nkvj")
