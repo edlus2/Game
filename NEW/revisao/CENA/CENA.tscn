@@ -10,5 +10,4 @@ tile_map_data = PackedByteArray("AAAAACYAAgABAAMAAAAAACcAAgABAAQAAAABACUAAgABAAM
 tile_set = ExtResource("1_iaiqr")
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("2_50y2n")]
-position = Vector2(493, 570)
-script = null
+position = Vector2(37, 560)
