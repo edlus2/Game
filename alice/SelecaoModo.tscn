@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://csdn85rmvhe1g"]
+
+[ext_resource type="Script" uid="uid://wwm5auhy66n0" path="res://selecao_modo.gd" id="1_2ecsp"]
+
+[node name="SelecaoModo_tscn" type="Node2D" unique_id=584563278]
+script = ExtResource("1_2ecsp")
+
+[node name="Btn1Player" type="Button" parent="." unique_id=1337139292]
+self_modulate = Color(18.892157, 7.4122334, 18.892157, 1)
+offset_left = 455.0
+offset_top = 199.0
+offset_right = 650.0
+offset_bottom = 293.0
+text = "P1"
+
+[node name="Btn2Player" type="Button" parent="." unique_id=573055460]
+self_modulate = Color(6.144511, 18.892157, 18.892157, 1)
+offset_left = 458.0
+offset_top = 353.0
+offset_right = 653.0
+offset_bottom = 447.0
+text = "P2"
+
+[connection signal="pressed" from="Btn1Player" to="." method="_on_btn_1_player_pressed"]
+[connection signal="pressed" from="Btn2Player" to="." method="_on_btn_2_player_pressed"]

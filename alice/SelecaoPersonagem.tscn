@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://ra4ya6lrrxft"]
+
+[ext_resource type="Script" uid="uid://c2w10ah7eyxi1" path="res://selecao_personagem.gd" id="1_jubyp"]
+
+[node name="SelecaoPersonagem" type="Node2D" unique_id=242480446]
+script = ExtResource("1_jubyp")
+
+[node name="BtnHomem" type="Button" parent="." unique_id=149193289]
+modulate = Color(3.7883093, 3.2674875, 18.892157, 1)
+offset_left = 460.0
+offset_top = 158.0
+offset_right = 638.0
+offset_bottom = 244.0
+text = "HOMEM"
+
+[node name="BtnMulher" type="Button" parent="." unique_id=1682854917]
+modulate = Color(18.892157, 4.8767896, 18.892157, 1)
+offset_left = 462.0
+offset_top = 340.0
+offset_right = 640.0
+offset_bottom = 426.0
+text = "MULHER"
+
+[connection signal="pressed" from="BtnHomem" to="." method="_on_btn_homem_pressed"]
+[connection signal="pressed" from="BtnMulher" to="." method="_on_btn_mulher_pressed"]

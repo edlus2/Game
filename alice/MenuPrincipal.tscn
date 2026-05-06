@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://c3yfaet0xsrml"]
+
+[ext_resource type="Script" uid="uid://bsr72bxda1qrk" path="res://menu_principal.gd" id="1_0oe1n"]
+
+[node name="MenuPrincipal_tscn" type="Node2D" unique_id=1327606451]
+script = ExtResource("1_0oe1n")
+
+[node name="BtnIniciar" type="Button" parent="." unique_id=149670367]
+self_modulate = Color(0, 4.307295, 12.837791, 1)
+offset_left = 452.0
+offset_top = 348.0
+offset_right = 714.0
+offset_bottom = 465.0
+theme_override_font_sizes/font_size = 20
+text = "INICIAR JOGO"
+
+[connection signal="pressed" from="BtnIniciar" to="." method="_on_btn_iniciar_pressed"]
