@@ -1,0 +1,89 @@
+[gd_scene format=3 uid="uid://c6uguavwkrxd3"]
+
+[ext_resource type="Script" uid="uid://nx81rtw2huds" path="res://bolsa.gd" id="1_jda6f"]
+[ext_resource type="Texture2D" uid="uid://dxl2ti3lcyv0i" path="res://icon.svg" id="2_sab74"]
+
+[node name="Bolsa" type="Control" unique_id=351812713]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_jda6f")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=2054624304]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.023529412, 0, 0.007843138, 0.5882353)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1012357257]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -126.5
+offset_right = 300.0
+offset_bottom = 126.5
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer" unique_id=1447560319]
+layout_mode = 2
+texture = ExtResource("2_sab74")
+
+[node name="Vida" type="Label" parent="VBoxContainer" unique_id=165106553]
+layout_mode = 2
+
+[node name="Ataque" type="Label" parent="VBoxContainer" unique_id=833025442]
+layout_mode = 2
+
+[node name="Defesa" type="Label" parent="VBoxContainer" unique_id=1054572384]
+layout_mode = 2
+
+[node name="escudo" type="Label" parent="VBoxContainer" unique_id=548303701]
+layout_mode = 2
+
+[node name="TabContainer" type="TabContainer" parent="." unique_id=1160398968]
+layout_mode = 1
+offset_left = 457.0
+offset_top = 78.0
+offset_right = 1057.0
+offset_bottom = 528.0
+current_tab = 1
+
+[node name="Equipamento" type="Control" parent="TabContainer" unique_id=1209851577]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="Poções" type="Control" parent="TabContainer" unique_id=250135883]
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="BtnUsarPorcao" type="Button" parent="TabContainer/Poções" unique_id=566580112]
+modulate = Color(13.342665, 2.585688, 13.342665, 1)
+layout_mode = 0
+offset_right = 44.0
+offset_bottom = 40.0
+
+[node name="Magia" type="Control" parent="TabContainer" unique_id=1612661650]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2
+
+[node name="Button" type="Button" parent="." unique_id=2017501277]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -94.0
+offset_bottom = 59.0
+grow_horizontal = 0
+text = "X"
+
+[connection signal="pressed" from="TabContainer/Poções/BtnUsarPorcao" to="." method="_on_btn_usar_porcao_pressed"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

@@ -7,5 +7,13 @@ var casa_pausa = 1
 var hp_max = 50
 var hp_atual = 50
 var ataque = 10
+var defesa = 5
+var escudo = 0
 var moedas = 0
-var chaves_elementais = [] # Lista para guardar as chaves (ex: "fogo", "agua")
+
+# Inventário
+var inventario = {
+	"porcoes": 3,
+	"magias": ["Fogo Inicial"],
+	"equipamentos": ["Espada de Madeira"]
+}

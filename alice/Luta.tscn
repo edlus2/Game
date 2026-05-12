@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dclegynn8hfql"]
 
 [ext_resource type="Script" uid="uid://cmn7xoumai0iw" path="res://luta.gd" id="1_v5poe"]
+[ext_resource type="PackedScene" uid="uid://c6uguavwkrxd3" path="res://Bolsa.tscn" id="2_sk5wu"]
 
 [node name="Luta" type="Node2D" unique_id=936988749]
 script = ExtResource("1_v5poe")
@@ -55,18 +56,27 @@ custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "FUGIR"
 
+[node name="BtnBolsa" type="Button" parent="CanvasLayer/HBoxContainer" unique_id=935942994]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Bolsa"
+
 [node name="HPJogador" type="Label" parent="CanvasLayer" unique_id=453628484]
-offset_left = 670.0
-offset_top = 554.0
-offset_right = 811.0
-offset_bottom = 644.0
+offset_left = 831.0
+offset_top = 550.0
+offset_right = 972.0
+offset_bottom = 640.0
 
 [node name="HPInimigo" type="Label" parent="CanvasLayer" unique_id=2141210691]
-offset_left = 352.0
-offset_top = 557.0
-offset_right = 525.0
-offset_bottom = 633.0
+offset_left = 958.0
+offset_top = 561.0
+offset_right = 1131.0
+offset_bottom = 637.0
+
+[node name="Bolsa" parent="CanvasLayer" unique_id=351812713 instance=ExtResource("2_sk5wu")]
+visible = false
 
 [connection signal="pressed" from="CanvasLayer/HBoxContainer/BtnAtacar" to="." method="_on_btn_atacar_pressed"]
 [connection signal="pressed" from="CanvasLayer/HBoxContainer/BtnDefender" to="." method="_on_btn_defender_pressed"]
 [connection signal="pressed" from="CanvasLayer/HBoxContainer/BtnFugir" to="." method="_on_btn_fugir_pressed"]
+[connection signal="pressed" from="CanvasLayer/HBoxContainer/BtnBolsa" to="." method="_on_btn_bolsa_pressed"]

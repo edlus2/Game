@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://c07384jkbgr4g"]
 
 [ext_resource type="Script" uid="uid://cpxgvrtrfcgpk" path="res://mapa_mundi.gd" id="1_d6icy"]
+[ext_resource type="PackedScene" uid="uid://c6uguavwkrxd3" path="res://Bolsa.tscn" id="2_l06ax"]
 
 [node name="MapaMundi" type="Node2D" unique_id=269483154]
 script = ExtResource("1_d6icy")
@@ -10,6 +11,15 @@ script = ExtResource("1_d6icy")
 [node name="PassosLabel" type="Label" parent="CanvasLayer" unique_id=578953111]
 offset_right = 88.0
 offset_bottom = 55.0
+
+[node name="Bolsa" parent="CanvasLayer" unique_id=351812713 instance=ExtResource("2_l06ax")]
+visible = false
+
+[node name="Button" type="Button" parent="CanvasLayer" unique_id=1003233725]
+offset_left = 52.0
+offset_top = 602.0
+offset_right = 131.0
+offset_bottom = 649.0
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1411147706]
 offset_left = -10.0
@@ -85,3 +95,5 @@ offset_left = 927.0
 offset_top = 352.0
 offset_right = 967.0
 offset_bottom = 392.0
+
+[connection signal="pressed" from="CanvasLayer/Button" to="." method="_on_button_pressed"]

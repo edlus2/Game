@@ -27,6 +27,10 @@ func _ready():
 	else:
 		jogador.color = Color.MAGENTA
 	
+	# ISSO AQUI RESOLVE O ERRO DE VOLTAR PRO COMEÇO:
+	# O mapa lê onde você parou antes de posicionar o jogador
+	casa_atual = DadosGlobais.casa_pausa
+	
 	ir_para_casa(casa_atual, false)
 	atualizar_ui()
 
@@ -70,6 +74,10 @@ func ir_para_casa(numero, animar):
 		if animar:
 			var tween = create_tween()
 			tween.tween_property(jogador, "position", no_casa.position, 0.2)
+			
+			# ESSA LINHA FAZ O JOGO ESPERAR O MOVIMENTO ACABAR:
+			await tween.finished 
+			
 		else:
 			jogador.position = no_casa.position
 	
@@ -95,3 +103,9 @@ func iniciar_luta():
 	DadosGlobais.casa_pausa = casa_atual
 	# Transição para a cena de luta
 	get_tree().change_scene_to_file("res://Luta.tscn")
+
+
+func _on_button_pressed() -> void:
+	$CanvasLayer/Bolsa.visible = true
+	$CanvasLayer/Bolsa.atualizar_dados()
+	$CanvasLayer/Bolsa.verificar_contexto()# Replace with function body.

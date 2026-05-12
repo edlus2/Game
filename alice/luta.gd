@@ -54,3 +54,20 @@ func derrota():
 
 func _on_btn_fugir_pressed():
 	get_tree().change_scene_to_file("res://MapaMundi.tscn")
+	
+	# Essa função é chamada pela Bolsa quando usamos um item na batalha
+func usar_item_passar_turno():
+	atualizar_texto_hp() # Atualiza o número de HP na tela de batalha
+	turno_jogador = false
+	
+	print("Item usado! Turno do monstro.")
+	
+	# Espera 1 segundo para o jogador ler e então o monstro ataca
+	await get_tree().create_timer(1.0).timeout
+	turno_inimigo()
+
+
+func _on_btn_bolsa_pressed() -> void:
+	$CanvasLayer/Bolsa.visible = true
+	$CanvasLayer/Bolsa.atualizar_dados()
+	$CanvasLayer/Bolsa.verificar_contexto()
