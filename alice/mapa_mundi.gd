@@ -7,6 +7,12 @@ var passos_restantes = 0
 var pode_girar_roleta = true
 var casa_atual = 1
 var historico_caminho = [] 
+var eventos_do_mapa = {
+	1: "vila",          # Casa 1 é o início, segura.
+	3: "bau",           # Casa 3 tem um baú de poção
+	5: "loja_pocao",    # Casa 5 será a sua primeira loja
+	8: "bau"            # Outro baú na casa 8
+}
 
 var conexoes = {
 	1: {"esq": 2, "dir":8, "cima": 6},
@@ -92,11 +98,43 @@ func atualizar_ui():
 			passos_label.text = "Aperte ESPAÇO para Girar"
 		else:
 			passos_label.text = "Passos Restantes: " + str(passos_restantes)
-
+func abrir_bau():
+	print("Você encontrou um Baú!")
+	
+	# Dá 1 poção ao jogador
+	DadosGlobais.inventario["porcoes"] += 1
+	
+	# Se a bolsa estiver aberta ou o UI precisar atualizar
+	atualizar_ui() 
+	
+	# Aqui no futuro podemos tocar um som de "Tcharam!" 
+	print("Você ganhou 1 Poção! Total: ", DadosGlobais.inventario["porcoes"])
+	
 func finalizar_turno():
-	print("Turno encerrado na casa: ", casa_atual)
-	# Removemos o sorteio por enquanto para testar o combate sempre
-	iniciar_luta() 
+	# Descobre o que tem na casa atual
+	var tipo_evento = eventos_do_mapa.get(casa_atual, "luta")
+	
+	if tipo_evento == "luta":
+		print("Entrando em Batalha!")
+		DadosGlobais.casa_pausa = casa_atual
+		get_tree().change_scene_to_file("res://Luta.tscn")
+		
+	elif tipo_evento == "bau":
+		abrir_bau()
+		
+		# IMPORTANTE: Como não mudamos de cena, precisamos avisar
+		# o jogo que o seu turno no mapa acabou e você já pode
+		# girar a roleta para andar de novo!
+		# (Mude "pode_girar_roleta" para o nome exato da sua variável que libera o botão)
+		pode_girar_roleta = true 
+		
+	elif tipo_evento == "loja_pocao":
+		print("Bem-vindo à loja de poções!")
+		pode_girar_roleta = true
+		
+	elif tipo_evento == "vila":
+		print("Você está seguro no vilarejo.")
+		pode_girar_roleta = true
 
 func iniciar_luta():
 	print("MONSTRO APARECEU!")
