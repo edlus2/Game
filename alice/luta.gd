@@ -6,6 +6,8 @@ extends Node2D
 @onready var hp_inimigo_label = $CanvasLayer/HPInimigo
 @onready var menu_principal = $CanvasLayer/MenuPrincipal
 @onready var menu_ataque = $CanvasLayer/MenuAtaque
+@onready var menu_magia = $CanvasLayer/MenuMagia
+@onready var menu_pocoes = $CanvasLayer/MenuPocoes
 
 # Variável para saber se o jogador está defendendo neste turno
 var defendendo = false
@@ -22,8 +24,11 @@ func _ready():
 	atualizar_texto_hp()
 
 func atualizar_texto_hp():
-	hp_jogador_label.text = "Seu HP: " + str(DadosGlobais.hp_atual)
-	hp_inimigo_label.text = "HP Inimigo: " + str(hp_inimigo)
+	# Atualiza o texto do Jogador mostrando HP e MP juntos
+	$CanvasLayer/HPJogador.text = "HP: " + str(DadosGlobais.hp_atual) + " / MP: " + str(DadosGlobais.mp_atual)
+	
+	# Atualiza o texto do Inimigo (verifique se a variável hp_inimigo tem esse nome mesmo)
+	$CanvasLayer/HPInimigo.text = "HP Inimigo: " + str(hp_inimigo)
 
 func turno_inimigo():
 	var dano_monstro = 10 # Substitua pelo dano real do seu monstro
@@ -49,11 +54,9 @@ func vitoria():
 	print("Venceu!")
 	DadosGlobais.moedas += 10
 	get_tree().change_scene_to_file("res://MapaMundi.tscn")
-
 func derrota():
 	DadosGlobais.hp_atual = DadosGlobais.hp_max
 	get_tree().change_scene_to_file("res://MenuPrincipal.tscn")
-
 func _on_btn_fugir_pressed():
 	if turno_jogador:
 		print("Você fugiu correndo para a vila!")
@@ -68,8 +71,6 @@ func _on_btn_fugir_pressed():
 		
 		# 3. Volta para o Mapa
 		get_tree().change_scene_to_file("res://MapaMundi.tscn")
-	
-	# Essa função é chamada pela Bolsa quando usamos um item na batalha
 func usar_item_passar_turno():
 	atualizar_texto_hp() # Atualiza o número de HP na tela de batalha
 	turno_jogador = false
@@ -79,23 +80,15 @@ func usar_item_passar_turno():
 	# Espera 1 segundo para o jogador ler e então o monstro ataca
 	await get_tree().create_timer(1.0).timeout
 	turno_inimigo()
-
-
 func _on_btn_bolsa_pressed() -> void:
 	$CanvasLayer/Bolsa.visible = true
 	$CanvasLayer/Bolsa.atualizar_dados()
 	$CanvasLayer/Bolsa.verificar_contexto()
-
-
-# Quando clica no primeiro "ATACAR"
 func _on_btn_atacar_pressed():
 	if turno_jogador:
 		# Esconde o menu principal e mostra as opções de ataque
 		menu_principal.visible = false
 		menu_ataque.visible = true
-
-# Quando escolhe o ataque FÍSICO
-# Quando escolhe o ataque FÍSICO
 func _on_btn_fisico_pressed():
 	# 1. Esconde todos os menus para o jogador não clicar duas vezes
 	menu_ataque.visible = false
@@ -119,27 +112,24 @@ func _on_btn_fisico_pressed():
 		# Espera 1 segundo para você ver o dano antes do monstro revidar
 		await get_tree().create_timer(1.0).timeout
 		turno_inimigo()
-
-# Quando escolhe MAGIA (Deixaremos preparado para o futuro)
 func _on_btn_magia_pressed():
-	print("Menu de magias em construção!")
-	# No futuro, faremos menu_ataque.visible = false e abriremos o MenuMagia
-
-# Quando escolhe POÇÕES
-func _on_btn_pocoes_pressed():
-	# 1. Esconde o menu de ataque e garante que o principal fique "pronto" embaixo
+	# Esconde as opções de Físico/Magia/Poção e mostra a lista de feitiços
 	menu_ataque.visible = false
-	menu_principal.visible = true
-	
-	# 2. Abre a bolsa na aba de poções
-	$CanvasLayer/Bolsa.visible = true
-	$CanvasLayer/Bolsa.atualizar_dados()
-	$CanvasLayer/Bolsa.verificar_contexto()
-	# Como já criamos a bolsa para abrir na aba de poções, vamos reutilizá-la!
-	$CanvasLayer/Bolsa.visible = true
-	$CanvasLayer/Bolsa.atualizar_dados()
-	$CanvasLayer/Bolsa.verificar_contexto()
-	
+	menu_magia.visible = true
+func _on_btn_voltar_magia_pressed():
+	# Volta para o menu de escolher o tipo de ataque
+	menu_magia.visible = false
+	menu_ataque.visible = true
+func _on_btn_pocoes_pressed():
+	menu_ataque.visible = false
+	menu_pocoes.visible = true
+	atualizar_botoes_pocoes() # Vamos criar essa função abaixo
+func atualizar_botoes_pocoes():
+	$CanvasLayer/MenuPocoes/BtnUsarHP.text = "Poção HP (" + str(DadosGlobais.inventario["porcoes"]) + ")"
+	$CanvasLayer/MenuPocoes/BtnUsarMP.text = "Poção MP (" + str(DadosGlobais.inventario["porcoes_mp"]) + ")"
+func _on_btn_voltar_pocao_pressed():
+	menu_pocoes.visible = false
+	menu_ataque.visible = true
 func _on_btn_defender_pressed():
 	if turno_jogador:
 		print("Jogador assumiu postura de defesa!")
@@ -151,7 +141,6 @@ func _on_btn_defender_pressed():
 		# Passa a vez para o inimigo após um pequeno atraso
 		await get_tree().create_timer(1.0).timeout
 		turno_inimigo()
-		
 func game_over():
 	print("Você foi derrotado na batalha!")
 	
@@ -168,3 +157,60 @@ func game_over():
 	
 	# 4. Volta para o Mapa
 	get_tree().change_scene_to_file("res://MapaMundi.tscn")
+func _on_btn_fogo_pressed():
+	var custo_mp = 5
+	
+	# 1. Verifica se o jogador tem MP suficiente
+	if DadosGlobais.mp_atual >= custo_mp:
+		
+		# 2. Esconde o menu de magias
+		menu_magia.visible = false
+		
+		# 3. Gasta o MP e causa o dano
+		DadosGlobais.mp_atual -= custo_mp
+		var dano_causado = DadosGlobais.ataque_magico
+		hp_inimigo -= dano_causado
+		
+		print("Você lançou Bola de Fogo e causou ", dano_causado, " de dano mágico!")
+		print("MP restante: ", DadosGlobais.mp_atual)
+		
+		# Atualiza a interface (HP e agora MP se você tiver criado o texto na tela)
+		atualizar_texto_hp() 
+		
+		# 4. Verifica se o monstro morreu
+		if hp_inimigo <= 0:
+			vitoria()
+		else:
+			# Passa a vez para o monstro
+			turno_jogador = false
+			await get_tree().create_timer(1.0).timeout
+			turno_inimigo()
+			
+	else:
+		# Se não tiver MP, o jogo avisa e NÃO passa o turno!
+		print("MP Insuficiente! Escolha outro ataque ou use uma poção.")
+func _on_btn_usar_hp_pressed():
+	if DadosGlobais.inventario["porcoes"] > 0:
+		DadosGlobais.inventario["porcoes"] -= 1
+		DadosGlobais.hp_atual = min(DadosGlobais.hp_atual + 20, DadosGlobais.hp_max) # Cura 20
+		
+		finalizar_uso_item("Você usou Poção de HP!")
+	else:
+		print("Você não tem mais poções de HP!")
+func _on_btn_usar_mp_pressed():
+	if DadosGlobais.inventario["porcoes_mp"] > 0:
+		DadosGlobais.inventario["porcoes_mp"] -= 1
+		DadosGlobais.mp_atual = min(DadosGlobais.mp_atual + DadosGlobais.mp_recuperado, DadosGlobais.mp_max)
+		
+		finalizar_uso_item("Você usou Poção de MP!")
+	else:
+		print("Você não tem mais poções de MP!")
+func finalizar_uso_item(mensagem):
+	print(mensagem)
+	menu_pocoes.visible = false
+	menu_principal.visible = false # Esconde para o monstro atacar
+	atualizar_texto_hp()
+	
+	turno_jogador = false
+	await get_tree().create_timer(1.0).timeout
+	turno_inimigo()

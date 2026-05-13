@@ -34,6 +34,25 @@ metadata/_edit_use_anchors_ = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=534184201]
 
+[node name="MenuPocoes" type="HBoxContainer" parent="CanvasLayer" unique_id=892440808]
+visible = false
+offset_left = 5.0
+offset_top = 550.0
+offset_right = 1151.0
+offset_bottom = 644.0
+
+[node name="BtnUsarHP" type="Button" parent="CanvasLayer/MenuPocoes" unique_id=1544413266]
+layout_mode = 2
+text = "Poção HP"
+
+[node name="BtnUsarMP" type="Button" parent="CanvasLayer/MenuPocoes" unique_id=921572776]
+layout_mode = 2
+text = "Poção MP"
+
+[node name="BtnVoltarPocao" type="Button" parent="CanvasLayer/MenuPocoes" unique_id=1215611409]
+layout_mode = 2
+text = "Voltar"
+
 [node name="MenuPrincipal" type="HBoxContainer" parent="CanvasLayer" unique_id=1757936700]
 anchors_preset = 12
 anchor_top = 1.0
@@ -79,6 +98,21 @@ text = "Magia"
 layout_mode = 2
 text = "Poções"
 
+[node name="MenuMagia" type="HBoxContainer" parent="CanvasLayer" unique_id=1315942563]
+visible = false
+offset_left = 6.0
+offset_top = 556.0
+offset_right = 737.0
+offset_bottom = 616.0
+
+[node name="BtnFogo" type="Button" parent="CanvasLayer/MenuMagia" unique_id=683812143]
+layout_mode = 2
+text = "Bola de fogo 5MP"
+
+[node name="BtnVoltarMagia" type="Button" parent="CanvasLayer/MenuMagia" unique_id=1177631559]
+layout_mode = 2
+text = "Voltar"
+
 [node name="HPJogador" type="Label" parent="CanvasLayer" unique_id=453628484]
 offset_left = 987.0
 offset_top = 130.0
@@ -94,9 +128,14 @@ offset_bottom = 215.0
 [node name="Bolsa" parent="CanvasLayer" unique_id=351812713 instance=ExtResource("2_sk5wu")]
 visible = false
 
+[connection signal="pressed" from="CanvasLayer/MenuPocoes/BtnUsarHP" to="." method="_on_btn_usar_hp_pressed"]
+[connection signal="pressed" from="CanvasLayer/MenuPocoes/BtnUsarMP" to="." method="_on_btn_usar_mp_pressed"]
+[connection signal="pressed" from="CanvasLayer/MenuPocoes/BtnVoltarPocao" to="." method="_on_btn_voltar_pocao_pressed"]
 [connection signal="pressed" from="CanvasLayer/MenuPrincipal/BtnAtacar" to="." method="_on_btn_atacar_pressed"]
 [connection signal="pressed" from="CanvasLayer/MenuPrincipal/BtnDefender" to="." method="_on_btn_defender_pressed"]
 [connection signal="pressed" from="CanvasLayer/MenuPrincipal/BtnFugir" to="." method="_on_btn_fugir_pressed"]
 [connection signal="pressed" from="CanvasLayer/MenuAtaque/BtnFisico" to="." method="_on_btn_fisico_pressed"]
 [connection signal="pressed" from="CanvasLayer/MenuAtaque/BtnMagia" to="." method="_on_btn_magia_pressed"]
 [connection signal="pressed" from="CanvasLayer/MenuAtaque/BtnPocoes" to="." method="_on_btn_pocoes_pressed"]
+[connection signal="pressed" from="CanvasLayer/MenuMagia/BtnFogo" to="." method="_on_btn_fogo_pressed"]
+[connection signal="pressed" from="CanvasLayer/MenuMagia/BtnVoltarMagia" to="." method="_on_btn_voltar_magia_pressed"]
