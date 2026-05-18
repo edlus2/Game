@@ -14,12 +14,13 @@ var defendendo = false
 var hp_inimigo = 30
 var turno_jogador = true
 
-func _ready():
-	# Define a cor do jogador
-	if DadosGlobais.personagem_escolhido == "homem":
-		jogador_visual.color = Color.BLUE
-	else:
-		jogador_visual.color = Color.MAGENTA
+func _ready():		
+	$JogadorLuta/AnimatedSprite2D.play("parado")
+	atualizar_texto_hp()
+	$JogadorLuta/AnimatedSprite2D.play("parado")
+	
+	# ADICIONE ESTA LINHA:
+	$Inimigo/AnimatedSprite2D.play("parado") 
 	
 	atualizar_texto_hp()
 
@@ -29,31 +30,51 @@ func atualizar_texto_hp():
 	
 	# Atualiza o texto do Inimigo (verifique se a variável hp_inimigo tem esse nome mesmo)
 	$CanvasLayer/HPInimigo.text = "HP Inimigo: " + str(hp_inimigo)
-
+	
+	
+	
 func turno_inimigo():
-	var dano_monstro = 10 # Substitua pelo dano real do seu monstro
+	
+	# 1. Toca a animação de ataque do Goblin
+	$Inimigo/AnimatedSprite2D.play("Ataque")
+	
+	# 2. Espera a animação de ataque terminar de tocar
+	await $Inimigo/AnimatedSprite2D.animation_finished
+	
+	# 3. Volta para a animação de respirar
+	$Inimigo/AnimatedSprite2D.play("parado")
+	
+	# --- A PARTIR DAQUI FICA O SEU CÓDIGO DE DANO QUE JÁ EXISTIA ---
+	var dano_monstro = 10
 	
 	if defendendo:
-		print("Dano reduzido pela metade!")
-		dano_monstro /= 2
-		# Reseta a defesa para o próximo turno
-		defendendo = false 
+		dano_monstro = dano_monstro / 2
+		print("Você defendeu! Recebeu apenas ", dano_monstro, " de dano.")
+		defendendo = false
+	else:
+		print("O monstro atacou! Você recebeu ", dano_monstro, " de dano.")
 		
 	DadosGlobais.hp_atual -= dano_monstro
 	atualizar_texto_hp()
 	
-	print("Você recebeu ", dano_monstro, " de dano.")
-	
 	if DadosGlobais.hp_atual <= 0:
-		game_over()
+		derrota()
 	else:
+		# Passa o turno de volta para o jogador
 		turno_jogador = true
-		menu_principal.visible = true
+		
+		# ---> ADICIONE ESTA LINHA AQUI: <---
+		# Ela faz os botões de ATACAR, DEFENDER e FUGIR reaparecerem!
+		$CanvasLayer/MenuPrincipal.visible = true
 
 func vitoria():
+	var pontos_ganhos = 50 # Monstros comuns dão menos pontos
+	DadosGlobais.pontos += pontos_ganhos
+	print("Vitória! Você ganhou ", pontos_ganhos, " pontos.")
+	# ... código para voltar ao mapa ...
 	print("Venceu!")
 	DadosGlobais.moedas += 10
-	get_tree().change_scene_to_file("res://MapaMundi.tscn")
+	get_tree().change_scene_to_file(DadosGlobais.cena_anterior)
 func derrota():
 	DadosGlobais.hp_atual = DadosGlobais.hp_max
 	get_tree().change_scene_to_file("res://MenuPrincipal.tscn")

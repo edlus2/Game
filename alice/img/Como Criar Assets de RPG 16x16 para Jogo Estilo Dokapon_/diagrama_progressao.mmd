@@ -1,0 +1,28 @@
+graph TD
+    Casa((Casa Central - Início))
+    
+    Casa --> AreaAgua[Área de Água]
+    AreaAgua --> ChefeAgua{Chefe Água}
+    ChefeAgua -- Chave 1 --> AreaTerra[Área de Terra]
+    
+    AreaTerra --> ChefeTerra{Chefe Terra}
+    ChefeTerra -- Chave 2 --> AreaFloresta[Área de Floresta]
+    
+    AreaFloresta --> ChefeFloresta{Chefe Floresta}
+    ChefeFloresta -- Chave 3 --> AreaFogo[Área de Fogo]
+    
+    AreaFogo --> ChefeFogo{Chefe Fogo}
+    ChefeFogo -- Chave 4 --> AreaLuz[Área de Luz]
+    
+    AreaLuz --> ChefeLuz{Chefe Luz}
+    ChefeLuz -- Chave 5 --> CasteloFinal[Castelo da Escuridão]
+    
+    CasteloFinal --> ChefeFinal((Chefe Final))
+
+    subgraph "Conexão por Pontos"
+        P1(.) --- P2(.) --- P3(.)
+    end
+    
+    style Casa fill:#f9f,stroke:#333,stroke-width:4px
+    style CasteloFinal fill:#555,color:#fff,stroke:#000
+    style ChefeFinal fill:#000,color:#fff,stroke:#f00

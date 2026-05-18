@@ -8,13 +8,28 @@ func _ready():
 	verificar_contexto()
 
 func atualizar_dados():
-	# Atualiza o HP e MP no painel de status
+	# 1. Atualiza Status (HP/MP)
 	$VBoxContainer/HPLabel.text = "HP: " + str(DadosGlobais.hp_atual) + " / " + str(DadosGlobais.hp_max)
 	$VBoxContainer/MPlabel.text = "MP: " + str(DadosGlobais.mp_atual) + " / " + str(DadosGlobais.mp_max)
 	
-	# Atualiza as quantidades nos botões da aba de poções
-	$TabContainer/Pocoes/BtnUsarHPBolsa.text = "Poção HP (" + str(DadosGlobais.inventario["porcoes"]) + ")"
-	$TabContainer/Pocoes/BtnUsarMPBolsa.text = "Poção MP (" + str(DadosGlobais.inventario["porcoes_mp"]) + ")"
+	# 2. Lógica das Poções
+	_verificar_item_lista($TabContainer/Pocoes/BtnUsarHPBolsa, DadosGlobais.inventario["porcoes"], "Poção HP")
+	_verificar_item_lista($TabContainer/Pocoes/BtnUsarMPBolsa, DadosGlobais.inventario["porcoes_mp"], "Poção MP")
+
+	# 3. Lógica das Magias (Mostra apenas se desbloqueado)
+	$TabContainer/Magia/BtnFogo.visible = DadosGlobais.magias_desbloqueadas["fogo"]
+	$TabContainer/Magia/BtnAgua.visible = DadosGlobais.magias_desbloqueadas["agua"]
+	
+	# 4. Lógica de Equipamentos
+	$TabContainer/Equipamento/BtnEspada.visible = DadosGlobais.equipamentos_possuidos["espada_ferro"]
+
+# Função auxiliar para economizar código e atualizar os nomes
+func _verificar_item_lista(botao, quantidade, nome_texto):
+	if quantidade > 0:
+		botao.visible = true
+		botao.text = nome_texto + " (" + str(quantidade) + ")"
+	else:
+		botao.visible = false # Se for 0, o botão some e o GridContainer reorganiza!
 
 func verificar_contexto():
 	var cena_atual = get_tree().current_scene.name
@@ -40,8 +55,10 @@ func verificar_contexto():
 		$TabContainer.tabs_visible = true
 		$VBoxContainer.visible = true
 
+# QUANDO FECHA A BOLSA (No botão de X ou Voltar)
 func _on_button_pressed():
 	visible = false
+	DadosGlobais.menu_aberto = false # AQUI ESTÁ A TRAVA! Quando fecha a bolsa, libera o movimento.
 
 # LÓGICA DE USAR A POÇÃO DE HP
 func _on_btn_usar_porcao_pressed():
@@ -91,3 +108,17 @@ func _on_btn_usar_mp_bolsa_pressed():
 			print("Seu MP já está cheio!")
 	else:
 		print("Você não tem poções de MP!")
+
+
+# --- FUNÇÕES DE CLICAR NAS MAGIAS E EQUIPAMENTOS NA BOLSA ---
+# Como a bolsa é só para visualização, coloquei um print para mostrar que funciona.
+# No futuro, podemos usar esses botões para trocar a espada equipada!
+
+func _on_btn_fogo_pressed() -> void:
+	print("Você está olhando a sua Magia de Fogo!")
+
+func _on_btn_agua_pressed() -> void:
+	print("Você está olhando a sua Magia de Água!")
+
+func _on_btn_espada_pressed() -> void:
+	print("A Espada de Ferro já está equipada!")

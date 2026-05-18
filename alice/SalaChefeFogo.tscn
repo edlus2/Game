@@ -1,0 +1,105 @@
+[gd_scene format=3 uid="uid://dpfda8t25hxpb"]
+
+[ext_resource type="Texture2D" uid="uid://cv3ndy4fbofs0" path="res://img/detalhe_area_fogo.png" id="1_f58oq"]
+[ext_resource type="Script" uid="uid://ciouxaouy0eo4" path="res://sala_chefe_fogo.gd" id="1_wj3h0"]
+
+[node name="SalaChefeFogo_tscn" type="Node2D" unique_id=579575711]
+script = ExtResource("1_wj3h0")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1078126905]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -649.0
+offset_top = -1325.0
+offset_right = 2723.0
+offset_bottom = 1377.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.36, 0.028799996, 0.03431992, 1)
+
+[node name="DetalheAreaFogo" type="Sprite2D" parent="." unique_id=1202884504]
+position = Vector2(902, -108.99999)
+scale = Vector2(1.4126601, 1.5809296)
+texture = ExtResource("1_f58oq")
+
+[node name="Jogador" type="ColorRect" parent="." unique_id=1274841504]
+offset_left = 592.0
+offset_top = 565.0
+offset_right = 602.0
+offset_bottom = 575.0
+
+[node name="Camera2D" type="Camera2D" parent="Jogador" unique_id=1135580400]
+zoom = Vector2(0.5, 0.5)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1689698692]
+
+[node name="PassosLabel" type="Label" parent="CanvasLayer" unique_id=1403465009]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="PontosLabel" type="Label" parent="CanvasLayer" unique_id=20714763]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Casas" type="Node2D" parent="." unique_id=1484751669]
+
+[node name="Casa10" type="ColorRect" parent="Casas" unique_id=2071326142]
+offset_left = 1218.0
+offset_top = 118.0
+offset_right = 1249.0
+offset_bottom = 148.0
+
+[node name="Casa1" type="ColorRect" parent="Casas" unique_id=236298432]
+offset_left = 885.0
+offset_top = 596.0
+offset_right = 907.0
+offset_bottom = 612.0
+
+[node name="Casa2" type="ColorRect" parent="Casas" unique_id=357724498]
+offset_left = 880.0
+offset_top = 216.0
+offset_right = 905.0
+offset_bottom = 237.0
+
+[node name="Casa3" type="ColorRect" parent="Casas" unique_id=2026895236]
+offset_left = 555.0
+offset_top = 132.0
+offset_right = 578.0
+offset_bottom = 147.0
+
+[node name="Casa4" type="ColorRect" parent="Casas" unique_id=775206349]
+offset_left = 434.0
+offset_top = -125.0
+offset_right = 458.0
+offset_bottom = -109.0
+
+[node name="Casa5" type="ColorRect" parent="Casas" unique_id=903090761]
+offset_left = 583.0
+offset_top = -289.0
+offset_right = 603.0
+offset_bottom = -270.0
+
+[node name="Casa6" type="ColorRect" parent="Casas" unique_id=2130147278]
+offset_left = 893.0
+offset_top = -185.0
+offset_right = 910.0
+offset_bottom = -168.0
+
+[node name="Casa7" type="ColorRect" parent="Casas" unique_id=495277856]
+offset_left = 890.0
+offset_top = -459.0
+offset_right = 911.0
+offset_bottom = -441.0
+
+[node name="Casa8" type="ColorRect" parent="Casas" unique_id=351475555]
+offset_left = 901.0
+offset_top = -639.0
+offset_right = 928.0
+offset_bottom = -610.0
+
+[node name="Casa9" type="ColorRect" parent="Casas" unique_id=797804278]
+offset_left = 1304.0
+offset_top = -136.0
+offset_right = 1332.0
+offset_bottom = -102.0
