@@ -1,0 +1,152 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://c83c28cvj35a3"]
+
+[ext_resource type="Texture2D" uid="uid://bakap5s2tq1rp" path="res://img/Como Criar Assets de RPG 16x16 para Jogo Estilo Dokapon_/assets_rpg_16x16_completo/casas/slime_animations_expanded.png" id="1_1w30p"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4xfrc"]
+atlas = ExtResource("1_1w30p")
+region = Rect2(0, 828, 249, 414)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_433bb"]
+atlas = ExtResource("1_1w30p")
+region = Rect2(249, 828, 249, 414)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tomfm"]
+atlas = ExtResource("1_1w30p")
+region = Rect2(498, 828, 249, 414)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n4ayt"]
+atlas = ExtResource("1_1w30p")
+region = Rect2(747, 828, 249, 414)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jel8a"]
+atlas = ExtResource("1_1w30p")
+region = Rect2(996, 828, 249, 414)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xvxxh"]
+atlas = ExtResource("1_1w30p")
+region = Rect2(0, 416, 249, 416)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k4kht"]
+atlas = ExtResource("1_1w30p")
+region = Rect2(249, 416, 249, 416)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mqm45"]
+atlas = ExtResource("1_1w30p")
+region = Rect2(498, 416, 249, 416)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d8eaq"]
+atlas = ExtResource("1_1w30p")
+region = Rect2(747, 416, 249, 416)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l323a"]
+atlas = ExtResource("1_1w30p")
+region = Rect2(996, 416, 249, 416)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d1kwo"]
+atlas = ExtResource("1_1w30p")
+region = Rect2(0, 416, 249, 416)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ynfj0"]
+atlas = ExtResource("1_1w30p")
+region = Rect2(249, 416, 249, 416)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wh5at"]
+atlas = ExtResource("1_1w30p")
+region = Rect2(498, 416, 249, 416)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7sokw"]
+atlas = ExtResource("1_1w30p")
+region = Rect2(0, 0, 249, 385)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4spco"]
+atlas = ExtResource("1_1w30p")
+region = Rect2(249, 0, 249, 385)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kk0b0"]
+atlas = ExtResource("1_1w30p")
+region = Rect2(498, 0, 249, 385)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_40ph3"]
+atlas = ExtResource("1_1w30p")
+region = Rect2(747, 0, 249, 385)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jrjqq"]
+atlas = ExtResource("1_1w30p")
+region = Rect2(996, 0, 249, 385)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4xfrc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_433bb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tomfm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n4ayt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jel8a")
+}],
+"loop": false,
+"name": &"Ataque",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xvxxh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k4kht")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mqm45")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d8eaq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l323a")
+}],
+"loop": false,
+"name": &"andar",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d1kwo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ynfj0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wh5at")
+}],
+"loop": true,
+"name": &"parado",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7sokw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4spco")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kk0b0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_40ph3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jrjqq")
+}],
+"loop": false,
+"name": &"recuar",
+"speed": 5.0
+}]

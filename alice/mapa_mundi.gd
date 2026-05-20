@@ -142,47 +142,32 @@ func finalizar_turno():
 		DadosGlobais.casa_pausa = casa_atual
 		DadosGlobais.cena_anterior = "res://MapaMundi.tscn" 
 		
+		# ---> NOVO: SORTEIO ALEATÓRIO DO MONSTRO DO TERRITÓRIO <---
+		var lista_monstros = DadosGlobais.pools_de_monstros[DadosGlobais.mapa_atual]
+		# Sorteia um índice da lista (ex: 0 para goblin, 1 para gosma)
+		var indice_sorteado = randi() % lista_monstros.size() 
+		DadosGlobais.inimigo_atual = lista_monstros[indice_sorteado]
+		print("Monstro sorteado para a luta: ", DadosGlobais.inimigo_atual)
+		
 		# 1. Faz a fumaça aparecer e tocar!
 		var fumaca = $Jogador/Fumaca
 		fumaca.visible = true
-		fumaca.play("explosao") # Coloque o nome que você deu para a animação aqui
+		fumaca.play("explosao")
 		
 		# 2. Espera a fumaça terminar
 		await fumaca.animation_finished
-		fumaca.visible = false # Esconde a fumaça de novo
+		fumaca.visible = false
 		
-		# 3. Faz a tela escurecer suavemente (de transparente para 100% preto)
+		# 3. Faz a tela escurecer
 		var tela_preta = $CanvasLayer/TelaPreta
 		var tween = create_tween()
-		tween.tween_property(tela_preta, "color:a", 1.0, 0.5) # Leva meio segundo pra ficar preta
+		tween.tween_property(tela_preta, "color:a", 1.0, 0.5)
 		
-		# 4. Espera a tela ficar totalmente preta
+		# 4. Espera a tela ficar preta
 		await tween.finished
 		
-		# 5. Só agora, com a tela preta escondendo o travamento, ele muda de cena!
+		# 5. Muda de cena
 		get_tree().change_scene_to_file("res://Luta.tscn")
-		
-	elif tipo_evento == "portao_fogo":
-		print("Entrando no Vulcão...")
-		# Forçamos a posição inicial para a Casa 1 do novo mapa
-		DadosGlobais.casa_pausa = 1 
-		get_tree().change_scene_to_file("res://SalaChefeFogo.tscn")
-		
-	elif tipo_evento == "bau":
-		abrir_bau()
-		# O turno no mapa acabou e você já pode girar a roleta para andar de novo!
-		pode_girar_roleta = true 
-		
-	elif tipo_evento == "loja_pocao":
-		print("Entrando na Loja...")
-		# Salva a posição para você voltar para o lugar certo depois
-		DadosGlobais.casa_pausa = casa_atual 
-		get_tree().change_scene_to_file("res://Loja.tscn")
-		
-	elif tipo_evento == "vila":
-		print("Você está seguro no vilarejo.")
-		pode_girar_roleta = true
-
 func iniciar_luta():
 	print("MONSTRO APARECEU!")
 	DadosGlobais.casa_pausa = casa_atual

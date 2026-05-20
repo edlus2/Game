@@ -33,3 +33,31 @@ var equipamentos_possuidos = {
 	"espada_ferro": true, # Começa com uma
 	"escudo_madeira": false
 }
+
+# --- SISTEMA DE GÊNERO ---
+# Pode ser "masculino" ou "feminino". Você mudará isso no menu de seleção depois!
+var genero_heroi = "masculino" 
+
+# --- SISTEMA DE MAPAS E MONSTROS ---
+var mapa_atual = "vilarejo"  # Registra em qual território o jogador está andando
+var inimigo_atual = "goblin" # Salva qual monstro foi sorteado para a luta atual
+
+# Tabelas de monstros por território (aqui você colocará os 8 de cada mapa no futuro)
+var pools_de_monstros = {
+	"vilarejo": ["goblin", "gosma"],
+	"vulcao": ["monstro_fogo1", "monstro_fogo2"] # Exemplo para o futuro
+}
+
+# Atributos e configurações de cada monstro
+var banco_de_monstros = {
+	"goblin": {
+		"hp": 30,
+		"ataque": 10,
+		"sprite_folder": "res://img/goblin_side_view_sprite.png" # Exemplo do caminho da sua imagem
+	},
+	"gosma": {
+		"hp": 20,
+		"ataque": 6,
+		"sprite_folder": "res://img/gosma_sprite.png"
+	}
+}

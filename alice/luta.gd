@@ -9,46 +9,68 @@ extends Node2D
 @onready var menu_magia = $CanvasLayer/MenuMagia
 @onready var menu_pocoes = $CanvasLayer/MenuPocoes
 
-# Variável para saber se o jogador está defendendo neste turno
+# Variáveis arrumadas sem repetição
 var defendendo = false
-var hp_inimigo = 30
+var hp_inimigo = 0
 var turno_jogador = true
 
 func _ready():		
+	# --- 1. CARREGA O VISUAL DO HERÓI BASEADO NO GÊNERO ---
+	if DadosGlobais.genero_heroi == "masculino":
+		# Se você usar SpriteFrames diferentes, você carrega eles aqui:
+		# $JogadorLuta/AnimatedSprite2D.sprite_frames = load("res://heroi_masculino.tres")
+		print("Carregado visual Masculino")
+	elif DadosGlobais.genero_heroi == "feminino":
+		# $JogadorLuta/AnimatedSprite2D.sprite_frames = load("res://heroi_feminino.tres")
+		print("Carregado visual Feminino")
+		
 	$JogadorLuta/AnimatedSprite2D.play("parado")
+	
+	# --- 2. CARREGA STATUS E CONFIGURAÇÕES DO MONSTRO SORTEADO ---
+	var nome_do_monstro = DadosGlobais.inimigo_atual
+	var dados_do_monstro = DadosGlobais.banco_de_monstros[nome_do_monstro]
+	$Inimigo/AnimatedSprite2D.sprite_frames = load("res://animacoes_" + nome_do_monstro + ".tres")
+	
+	$Inimigo/AnimatedSprite2D.play("parado")
+	# Aplica a vida máxima que configuramos para ele lá no DadosGlobais
+	hp_inimigo = dados_do_monstro["hp"] 
+	
+	# Se você tiver SpriteFrames prontos para cada monstro, pode carregar dinamicamente:
+	# $Inimigo/AnimatedSprite2D.sprite_frames = load("res://animacoes_" + nome_do_monstro + ".tres")
+	
 	$Inimigo/AnimatedSprite2D.play("parado") 
 	atualizar_texto_hp()
 
 func atualizar_texto_hp():
-	# Atualiza o texto do Jogador mostrando HP e MP juntos
 	$CanvasLayer/HPJogador.text = "HP: " + str(DadosGlobais.hp_atual) + " / MP: " + str(DadosGlobais.mp_atual)
-	
-	# Atualiza o texto do Inimigo (verifique se a variável hp_inimigo tem esse nome mesmo)
 	$CanvasLayer/HPInimigo.text = "HP Inimigo: " + str(hp_inimigo)
+
+# --- NOVA FUNÇÃO PARA O EFEITO DE DANO ---
+func piscar_vermelho(sprite):
+	sprite.modulate = Color(1, 0, 0) # Pinta a imagem de vermelho
+	await get_tree().create_timer(0.2).timeout # Espera um instante
+	sprite.modulate = Color(1, 1, 1) # Volta para a cor original
 	
 func turno_inimigo():
-	# 1. Descobre quem são os nós e onde eles estão
 	var goblin = $Inimigo
 	var heroi = $JogadorLuta
+	var animacao_heroi = $JogadorLuta/AnimatedSprite2D
 	var posicao_original = goblin.position
 	
-	# Calcula a posição de ataque
 	var alvo_ataque = Vector2(heroi.position.x + 50, goblin.position.y)
 	
-	# 2. A INVESTIDA (Toca animação de andar e vai)
 	$Inimigo/AnimatedSprite2D.play("andar")
 	var tween_ida = create_tween()
 	tween_ida.tween_property(goblin, "position", alvo_ataque, 0.4) 
 	
-	# Espera o Goblin chegar no herói
 	await tween_ida.finished
 	
-	# 3. O ATAQUE!
 	$Inimigo/AnimatedSprite2D.play("Ataque")
 	await $Inimigo/AnimatedSprite2D.animation_finished
 	
-	# --- CÁLCULO DE DANO ---
-	var dano_monstro = 10 
+	# Pega o dano real do monstro sorteado lá do DadosGlobais
+	var nome_do_monstro = DadosGlobais.inimigo_atual
+	var dano_monstro = DadosGlobais.banco_de_monstros[nome_do_monstro]["ataque"]
 	
 	if defendendo:
 		dano_monstro = dano_monstro / 2
@@ -60,15 +82,15 @@ func turno_inimigo():
 	DadosGlobais.hp_atual -= dano_monstro
 	atualizar_texto_hp()
 	
-	# 4. O RETORNO (Toca animação de recuar e volta)
+	# ---> FAZ O HERÓI PISCAR VERMELHO <---
+	piscar_vermelho(animacao_heroi)
+	
 	$Inimigo/AnimatedSprite2D.play("recuar")
 	var tween_volta = create_tween()
 	tween_volta.tween_property(goblin, "position", posicao_original, 0.4)
 	
-	# Espera ele voltar
 	await tween_volta.finished
 	
-	# 5. VOLTA A RESPIRAR E ENCERRA O TURNO
 	$Inimigo/AnimatedSprite2D.play("parado")
 	
 	if DadosGlobais.hp_atual <= 0:
@@ -76,6 +98,54 @@ func turno_inimigo():
 	else:
 		turno_jogador = true
 		$CanvasLayer/MenuPrincipal.visible = true
+
+func _on_btn_fisico_pressed():
+	menu_ataque.visible = false
+	menu_principal.visible = false
+	
+	var heroi = $JogadorLuta
+	var animacao_heroi = $JogadorLuta/AnimatedSprite2D
+	var goblin = $Inimigo
+	var animacao_goblin = $Inimigo/AnimatedSprite2D
+	var posicao_original = heroi.position
+	
+	# Calcula a posição de ataque
+	var alvo_ataque = Vector2(goblin.position.x - 50, heroi.position.y)
+	
+	# A INVESTIDA DO HERÓI 
+	animacao_heroi.play("parado") 
+	var tween_ida = create_tween()
+	tween_ida.tween_property(heroi, "position", alvo_ataque, 0.4)
+	
+	await tween_ida.finished
+	
+	# O ATAQUE 
+	animacao_heroi.play("parado") 
+	await get_tree().create_timer(0.2).timeout
+	
+	var dano_causado = DadosGlobais.ataque
+	hp_inimigo -= dano_causado 
+	atualizar_texto_hp()
+	print("Você atacou e causou ", dano_causado, " de dano no monstro!")
+	
+	# ---> FAZ O INIMIGO PISCAR VERMELHO <---
+	piscar_vermelho(animacao_goblin)
+	
+	# O RETORNO
+	animacao_heroi.play("parado") 
+	var tween_volta = create_tween()
+	tween_volta.tween_property(heroi, "position", posicao_original, 0.4)
+	
+	await tween_volta.finished
+	
+	animacao_heroi.play("parado")
+	
+	if hp_inimigo <= 0:
+		vitoria()
+	else:
+		turno_jogador = false
+		await get_tree().create_timer(0.5).timeout
+		turno_inimigo()
 
 func vitoria():
 	var pontos_ganhos = 50 
@@ -114,22 +184,6 @@ func _on_btn_atacar_pressed():
 	if turno_jogador:
 		menu_principal.visible = false
 		menu_ataque.visible = true
-
-func _on_btn_fisico_pressed():
-	menu_ataque.visible = false
-	menu_principal.visible = false
-	
-	var dano_causado = DadosGlobais.ataque
-	hp_inimigo -= dano_causado 
-	atualizar_texto_hp()
-	print("Você atacou e causou ", dano_causado, " de dano no monstro!")
-	
-	if hp_inimigo <= 0:
-		vitoria()
-	else:
-		turno_jogador = false
-		await get_tree().create_timer(1.0).timeout
-		turno_inimigo()
 
 func _on_btn_magia_pressed():
 	menu_ataque.visible = false
@@ -180,6 +234,8 @@ func _on_btn_fogo_pressed():
 		print("Você lançou Bola de Fogo e causou ", dano_causado, " de dano mágico!")
 		print("MP restante: ", DadosGlobais.mp_atual)
 		atualizar_texto_hp() 
+		
+		piscar_vermelho($Inimigo/AnimatedSprite2D)
 		
 		if hp_inimigo <= 0:
 			vitoria()
